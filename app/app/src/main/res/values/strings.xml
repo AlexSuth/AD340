@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AD340app1</string>
+    <string name="zip_error_long">Zipcode is too long!</string>
+    <string name="zip_error_short">Zipcode is too short!</string>
 </resources>

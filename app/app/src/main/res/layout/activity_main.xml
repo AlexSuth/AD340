@@ -6,13 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_location_on_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/zipcodeEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello AD340!"
+        android:layout_marginBottom="8dp"
+        android:hint="Please Enter Zipcode:"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/enterButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/enterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="336dp"
+        android:text="Submit Zipcode"
+        android:textColor="#000000"
+        android:textColorHint="#CF1111"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/zipcodeEditText"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="@+id/zipcodeEditText" />
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome!"
+        android:textSize="@dimen/title_text_height"
+        app:layout_constraintBottom_toTopOf="@+id/zipcodeEditText"
+        app:layout_constraintEnd_toEndOf="@+id/zipcodeEditText"
+        app:layout_constraintStart_toStartOf="@+id/zipcodeEditText" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
