@@ -11,35 +11,36 @@
         android:id="@+id/imageView"
         android:layout_width="@dimen/image_size"
         android:layout_height="@dimen/image_size"
+        android:layout_marginTop="100dp"
         android:src="@drawable/ic_location_on_black_24dp"
-        app:layout_constraintBottom_toTopOf="@+id/title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <EditText
         android:id="@+id/zipcodeEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:hint="Please Enter Zipcode:"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/enterButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <Button
         android:id="@+id/enterButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="336dp"
         android:text="Submit Zipcode"
         android:textColor="#000000"
         android:textColorHint="#CF1111"
 
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/zipcodeEditText"
-        app:layout_constraintStart_toStartOf="@+id/zipcodeEditText" />
-
+        app:layout_constraintStart_toStartOf="@+id/zipcodeEditText"
+        app:layout_constraintTop_toBottomOf="@+id/zipcodeEditText" />
 
     <TextView
         android:id="@+id/title"
@@ -47,16 +48,16 @@
         android:layout_height="wrap_content"
         android:text="Welcome!"
         android:textSize="@dimen/title_text_height"
-        app:layout_constraintBottom_toTopOf="@+id/zipcodeEditText"
         app:layout_constraintEnd_toEndOf="@+id/zipcodeEditText"
-        app:layout_constraintStart_toStartOf="@+id/zipcodeEditText" />
+        app:layout_constraintStart_toStartOf="@+id/zipcodeEditText"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/forecastList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:background="#ABABAB"
         app:layout_constraintBottom_toBottomOf="parent"

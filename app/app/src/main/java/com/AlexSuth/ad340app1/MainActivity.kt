@@ -1,5 +1,6 @@
 package com.AlexSuth.ad340app1
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.AlexSuth.ad340app1.details.ForecastDetailsActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,17 +35,25 @@ class MainActivity : AppCompatActivity() {
 
         val forecastList: RecyclerView = findViewById(R.id.forecastList)
         forecastList.layoutManager = LinearLayoutManager(this)
-        val dailyForecastAdapter = DailyForecastAdapter() { forecastItem ->
-            val msg = getString(R.string.forecast_clicked_format, forecastItem.temp, forecastItem.description)
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        val dailyForecastAdapter = DailyForecastAdapter() { forecast ->
+            showForecastDetails(forecast)
         }
         forecastList.adapter = dailyForecastAdapter
-
 
         val weeklyForecastObserver = Observer<List<DailyForecast>> { forecastItems ->
             //update our list adapter
             dailyForecastAdapter.submitList(forecastItems)
         }
         forecastRepository.weeklyForecast.observe(this, weeklyForecastObserver)
+    }
+
+    private fun showForecastDetails(forecast: DailyForecast){
+        val forecastDetailsIntent = Intent(this, ForecastDetailsActivity::class.java)
+
+        forecastDetailsIntent.putExtra("key_temp", forecast.temp)
+        forecastDetailsIntent.putExtra("key_description", forecast.description)
+
+        startActivity(forecastDetailsIntent)
+
     }
 }
