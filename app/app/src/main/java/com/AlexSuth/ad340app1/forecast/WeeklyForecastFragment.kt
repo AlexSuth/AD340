@@ -16,11 +16,12 @@ import com.AlexSuth.ad340app1.*
 import com.AlexSuth.ad340app1.details.ForecastDetailsFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 /**
- * A simple [Fragment] subclass.
+ * Displays the 7-Day forecast for the current saved location.
  */
 class WeeklyForecastFragment : Fragment() {
 
     private val forecastRepository = ForecastRepository()
+    private lateinit var locationRepository: LocationRepository
     private lateinit var tempDisplaySettingManager: TempDisplaySettingManager
 
     override fun onCreateView(
@@ -53,7 +54,13 @@ class WeeklyForecastFragment : Fragment() {
             showLocationEntry()
         }
 
-        forecastRepository.loadForecast(zipcode)
+        locationRepository = LocationRepository(requireContext())
+        val savedLocationObserver = Observer<Location> {savedLocation ->
+            when (savedLocation) {
+                is Location.Zipcode -> forecastRepository.loadWeeklyForecast(savedLocation.zipcode)
+            }
+        }
+        locationRepository.savedLocation.observe(viewLifecycleOwner, savedLocationObserver)
 
         return view
     }

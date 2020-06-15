@@ -9,18 +9,26 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.AlexSuth.ad340app1.Location
+import com.AlexSuth.ad340app1.LocationRepository
 
 import com.AlexSuth.ad340app1.R
 
 /**
  * A simple [Fragment] subclass.
+ * Allows user to save a location using zipcode
+ * This location is then used to determine hich forecast to load
  */
 class LocationEntryFragment : Fragment() {
+
+    private lateinit var locationRepository: LocationRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        locationRepository = LocationRepository(requireContext())
+
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_location_entry, container, false)
 
@@ -29,10 +37,10 @@ class LocationEntryFragment : Fragment() {
 
         enterButton.setOnClickListener {
             val zipcode: String = zipcodeEditText.text.toString()
-
             if (zipcode.length != 5) {
                 Toast.makeText(requireContext(), R.string.zip_error, Toast.LENGTH_SHORT).show()
             } else {
+                locationRepository.saveLocation(Location.Zipcode(zipcode))
                 findNavController().navigateUp()
             }
         }
