@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.AlexSuth.ad340app1.*
 import com.AlexSuth.ad340app1.api.CurrentWeather
+import com.AlexSuth.ad340app1.api.DailyForecast
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 /**
@@ -59,11 +60,6 @@ class CurrentForecastFragment : Fragment() {
 
     private fun showLocationEntry() {
         val action = CurrentForecastFragmentDirections.actionCurrentForecastFragmentToLocationEntryFragment()
-        findNavController().navigate(action)
-    }
-
-    private fun showForecastDetails(forecast: DailyForecast){
-        val action = CurrentForecastFragmentDirections.actionCurrentForecastFragmentToForecastDetailsFragment(forecast.temp, forecast.description)
         findNavController().navigate(action)
     }
 
