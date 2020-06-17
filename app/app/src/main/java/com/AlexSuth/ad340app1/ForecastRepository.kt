@@ -9,11 +9,13 @@ import com.AlexSuth.ad340app1.api.createOpenWeatherMapService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import java.util.*
 import kotlin.random.Random
 
 class ForecastRepository {
 
-
+    private val weatherService = createOpenWeatherMapService()
     private val _currentWeather = MutableLiveData<CurrentWeather>()
     val currentWeather: LiveData<CurrentWeather> = _currentWeather
 
@@ -21,8 +23,9 @@ class ForecastRepository {
     val weeklyForecast: LiveData<WeeklyForecast> = _weeklyForecast
 
     fun loadWeeklyForecast(zipcode: String){
+
         val call = createOpenWeatherMapService().currentWeather(zipcode, "imperial", BuildConfig.OPEN_WEATHER_MAP_API_KEY)
-        call.enqueue(object : Callback<CurrentWeather> {
+        call.enqueue(object : Callback<CurrentWeather>{
             override fun onFailure(call: Call<CurrentWeather>, t: Throwable) {
                 Log.e(ForecastRepository::class.java.simpleName, "error loading location for weekly forecast", t)
             }
@@ -30,11 +33,11 @@ class ForecastRepository {
             override fun onResponse(call: Call<CurrentWeather>, response: Response<CurrentWeather>) {
                 val weatherResponse = response.body()
                 if (weatherResponse != null) {
-                   // load 7 day forecast
+                    // load 7 day forecast
                     val forecastCall = createOpenWeatherMapService().sevenDayForecast(
                         lat = weatherResponse.coord.lat,
                         lon = weatherResponse.coord.lon,
-                        exclude = "current,minutely,hourly",
+                        exclude = "current, minutely, hourly",
                         units = "imperial",
                         apiKey = BuildConfig.OPEN_WEATHER_MAP_API_KEY
                     )
@@ -49,7 +52,6 @@ class ForecastRepository {
                                 _weeklyForecast.value = weeklyForecastResponse
                             }
                         }
-
                     })
                 }
             }
@@ -59,7 +61,7 @@ class ForecastRepository {
 
     fun loadCurrentForecast(zipcode: String) {
         val call = createOpenWeatherMapService().currentWeather(zipcode, "imperial", BuildConfig.OPEN_WEATHER_MAP_API_KEY)
-        call.enqueue(object : Callback<CurrentWeather> {
+        call.enqueue(object : Callback<CurrentWeather>{
             override fun onFailure(call: Call<CurrentWeather>, t: Throwable) {
                 Log.e(ForecastRepository::class.java.simpleName, "error loading current weather", t)
             }

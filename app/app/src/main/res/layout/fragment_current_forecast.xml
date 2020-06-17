@@ -36,6 +36,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@+id/locationName"
         app:layout_constraintTop_toBottomOf="@+id/locationName"
-        tools:text="76" />
+        tools:text="72.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

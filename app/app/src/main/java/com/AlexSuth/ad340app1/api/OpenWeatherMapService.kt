@@ -6,13 +6,14 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-fun createOpenWeatherMapService(): OpenWeatherMapService {
+fun createOpenWeatherMapService() : OpenWeatherMapService {
     val retrofit = Retrofit.Builder()
         .baseUrl("http://api.openweathermap.org")
         .addConverterFactory(MoshiConverterFactory.create())
         .build()
 
     return retrofit.create(OpenWeatherMapService::class.java)
+
 }
 
 interface OpenWeatherMapService {
@@ -32,4 +33,5 @@ interface OpenWeatherMapService {
         @Query("units") units: String,
         @Query("appid") apiKey: String
     ): Call<WeeklyForecast>
+
 }

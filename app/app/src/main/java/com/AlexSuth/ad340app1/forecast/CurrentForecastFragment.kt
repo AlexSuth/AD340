@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.AlexSuth.ad340app1.*
 import com.AlexSuth.ad340app1.api.CurrentWeather
 import com.AlexSuth.ad340app1.api.DailyForecast
+import kotlinx.android.synthetic.*
+
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 /**
@@ -35,17 +37,17 @@ class CurrentForecastFragment : Fragment() {
 
         tempDisplaySettingManager = TempDisplaySettingManager(requireContext())
 
+        val locationEntryButton : FloatingActionButton = view.findViewById(R.id.locationEntryButton)
+        locationEntryButton.setOnClickListener {
+            showLocationEntry()
+        }
+
         //Create the observer which updates the UI in response to forecast updates
        val currentWeatherObserver = Observer<CurrentWeather> { weather ->
            locationName.text = weather.name
            tempText.text = formatTempForDisplay(weather.forecast.temp, tempDisplaySettingManager.getTempDisplaySetting())
        }
        forecastRepository.currentWeather.observe(viewLifecycleOwner, currentWeatherObserver)
-
-        val locationEntryButton : FloatingActionButton = view.findViewById(R.id.locationEntryButton)
-        locationEntryButton.setOnClickListener {
-            showLocationEntry()
-        }
 
         locationRepository = LocationRepository(requireContext())
         val savedLocationObserver = Observer<Location> { savedLocation ->

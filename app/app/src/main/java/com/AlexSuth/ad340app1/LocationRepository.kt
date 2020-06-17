@@ -4,13 +4,14 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
-sealed class Location {
+sealed class Location{
     data class Zipcode(val zipcode: String) : Location()
 }
 
 private const val KEY_ZIPCODE = "key_zipcode"
 
 class LocationRepository(context: Context) {
+
     private val preferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
 
     private val _savedLocation: MutableLiveData<Location> = MutableLiveData()
@@ -23,19 +24,19 @@ class LocationRepository(context: Context) {
         }
 
         broadcastSavedZipcode()
+
     }
 
     fun saveLocation(location: Location){
-        when(location) {
+        when (location) {
             is Location.Zipcode -> preferences.edit().putString(KEY_ZIPCODE, location.zipcode).apply()
         }
     }
 
     private fun broadcastSavedZipcode() {
         val zipcode = preferences.getString(KEY_ZIPCODE, "")
-        if(zipcode != null && zipcode.isNotBlank()) {
+        if (zipcode != null && zipcode.isNotBlank()) {
             _savedLocation.value = Location.Zipcode(zipcode)
         }
     }
 }
-

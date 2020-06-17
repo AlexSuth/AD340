@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.AlexSuth.ad340app1.Location
 import com.AlexSuth.ad340app1.LocationRepository
+import com.AlexSuth.ad340app1.ForecastRepository
 
 import com.AlexSuth.ad340app1.R
 
